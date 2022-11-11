@@ -11,14 +11,19 @@ namespace Shulte
 {
 	public partial class MainPage : ContentPage
 	{
-		
+		gridBuilder gb;
 		public MainPage()
 		{
-			InitializeComponent();
-			gridBuilder gb = new gridBuilder();
-			this.LoadFromXaml(gb.getGrid());
+			//InitializeComponent();
+			gb = new gridBuilder();
+			this.LoadFromXaml(gb.getGrid(false));
+			
 
-
+		}
+		private void onButtonPressed(Object sender, EventArgs e)
+		{
+			if (!gb.en.CheckAnsw(Byte.Parse((sender as Button).Text)))
+				DisplayAlert("Неверно","Неверно","OK") ;
 		}
 	}
 }
