@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace Shulte
 {
-	struct Cell
+	public struct Cell
 	{
 		byte drawvalue;
 		public byte Drawvalue
@@ -38,11 +38,11 @@ namespace Shulte
 			}
 		}
 	}
-	class engine
+	public class engine
 	{
 		public Cell[,] arr = new Cell[7, 7];
 		Byte curnum;
-		bool RedRule;
+		bool RedRule { get; set; }
 		public bool CheckAnsw (byte answer)
 		{
 			if (RedRule)

@@ -9,21 +9,25 @@ using Xamarin.Forms.Xaml;
 
 namespace Shulte
 {
-	public partial class MainPage : ContentPage
+	public partial class MainPage : TabbedPage
 	{
-		gridBuilder gb;
+		static gridBuilder gb;
 		public MainPage()
 		{
-			//InitializeComponent();
-			gb = new gridBuilder();
-			this.LoadFromXaml(gb.getGrid(false));
-			
-
+			InitializeComponent();
 		}
-		private void onButtonPressed(Object sender, EventArgs e)
+		protected void onBlackAppearing(Object sender, EventArgs e)
 		{
-			if (!gb.en.CheckAnsw(Byte.Parse((sender as Button).Text)))
-				DisplayAlert("Неверно","Неверно","OK") ;
+			gb = new gridBuilder();
+			 (sender as PageBlack).LoadFromXaml(gb.getGrid(false));
+			(sender as PageBlack).gb = gb;
 		}
+		protected void onRedAppearing(Object sender, EventArgs e)
+		{
+			gb = new gridBuilder();
+			(sender as PageRed).LoadFromXaml(gb.getGrid(true));
+			(sender as PageRed).gb = gb;
+		}
+
 	}
 }

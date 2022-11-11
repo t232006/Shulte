@@ -11,7 +11,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\blackGrid.bmp" />
+    <None Remove="Resources\redGrid.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\blackGrid.bmp" />
+    <EmbeddedResource Include="Resources\redGrid.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="PageRed.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

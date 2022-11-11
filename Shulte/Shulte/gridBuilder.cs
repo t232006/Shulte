@@ -4,13 +4,15 @@ using System.Text;
 
 namespace Shulte
 {
-	class gridBuilder
+	public class gridBuilder
 	{
 		StringBuilder xmpl;
 		public engine en;
-		string Cellscreator(byte volume, byte ii, byte jj)
+		string Cellscreator(byte volume,bool Red, byte ii, byte jj)
 		{
-			string insstyle = "{StaticResource BlackButton}";
+			string insstyle;
+			if (Red) insstyle = "{StaticResource RedButton}";
+			else insstyle = "{StaticResource BlackButton}";
 			return $@"<Button Text = ""{ volume} "" Pressed=""onButtonPressed"" Grid.Row = ""{ii}"" Grid.Column = ""{jj}"" Style = ""{insstyle}"" />";
 		}
 		public string getGrid(bool _rule)
@@ -32,7 +34,7 @@ namespace Shulte
 			xmpl.Append("</Grid.ColumnDefinitions>");
 			for (i = 0; i < 7; i++)
 				for (j = 0; j < 7; j++)
-					xmpl.Append(Cellscreator(en.arr[i, j].Drawvalue, i, j));
+					xmpl.Append(Cellscreator(en.arr[i, j].Drawvalue, en.arr[i, j].DoRed, i, j));
 			xmpl.Append("</Grid></ContentPage>");
 			return xmpl.ToString();
 			
