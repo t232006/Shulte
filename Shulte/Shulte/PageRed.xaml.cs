@@ -20,8 +20,13 @@ namespace Shulte
 		
 		private void onButtonPressed(Object sender, EventArgs e)
 		{
-			if (!gb.en.CheckAnsw(Byte.Parse((sender as Button).Text)))
+			string s = gb.en.CheckAnsw(byte.Parse((sender as Button).Text));
+			if (s == "false")
 				DisplayAlert("Неверно", "Неверно", "OK");
+			else if (s != "true")
+			{
+				DisplayAlert("Игра закончена", s, "OK");
+			}
 		}
 
 	}

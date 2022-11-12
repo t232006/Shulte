@@ -10,8 +10,8 @@ namespace Shulte
 		byte drawvalue;
 		public byte Drawvalue
 		{
-			get { return drawvalue; } 
-			
+			get { return drawvalue; }
+
 		}
 		Color color;
 		public bool DoRed
@@ -28,6 +28,7 @@ namespace Shulte
 			}
 		}
 		byte realvalue;
+		
 		public byte Realvalue
 		{
 			set 
@@ -42,9 +43,18 @@ namespace Shulte
 	{
 		public Cell[,] arr = new Cell[7, 7];
 		Byte curnum;
+		DateTime start;
+		//DateTime finish;
+		public DateTime Start { get => start; }
+		//public DateTime Finish { get => finish; }
 		bool RedRule { get; set; }
-		public bool CheckAnsw (byte answer)
+		public string CheckAnsw (byte answer)
 		{
+			if (curnum == 50)
+			{
+				DateTime finish = DateTime.Now;
+				return finish.Subtract(start).ToString();
+			}
 			if (RedRule)
 			{
 				if (curnum % 2 == 0)
@@ -56,12 +66,13 @@ namespace Shulte
 					if (curnum / 2 + 1 == answer) { curnum++; return true; }
 				}
 			}
-			else if (answer == curnum) { curnum++; return true; }
-			return false;
+			else if (answer == curnum) { curnum++; return "true"; }
+			return "false";
 		}
 		public engine(bool _redRule)
 		{
 			RedRule = _redRule;
+			start = DateTime.Now;
 			curnum = 1;
 			List<byte> cont = new List<byte>();
 			Random k = new Random();
@@ -86,5 +97,6 @@ namespace Shulte
 			}
 
 		}
+		
 	}
 }
