@@ -6,7 +6,7 @@
     <TabbedPage.Children>
         <loc:PageBlack x:Name="pBlack" Title="Черный" Appearing="onBlackAppearing"/>
         <loc:PageRed x:Name="pRed" Title="Красный-черный" Appearing="onRedAppearing"/>
-
+        <loc:Settings x:Name="pSettings" Title="Настройки"/>
     </TabbedPage.Children>
     
     

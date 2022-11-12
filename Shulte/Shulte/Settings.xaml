@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Shulte.Settings">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelSt" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+            <Style x:Key="swichSt" TargetType="Switch">
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value=".995,0.5,150,25"/>
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+            </Style>
+            <Style x:Key="LlabelSt" TargetType="Label" BasedOn="{StaticResource Key=labelSt}">
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="10,5,270,35"/>
+            </Style>
+            <Style x:Key="RlabelSt" TargetType="Label" BasedOn="{StaticResource Key=labelSt}">
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value=".995,0.3,350,35"/>
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <TableView Intent="Settings" BackgroundColor="White">
+            <TableRoot>
+                <TableSection Title="Тип таблицы и внешний вид">
+                    <ViewCell>
+                        <AbsoluteLayout>
+                            <Label Text="{Binding Source={x:Reference Name=slDim},
+                                Path=Value,
+                                StringFormat='Размерность {0} X {0}'}"
+                                   FontSize="Medium"
+                                   Style="{StaticResource RlabelSt}"/>
+                            <Stepper Maximum="10"
+                                     Minimum="4"
+                                     Increment="1"
+                                     x:Name="slDim"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <AbsoluteLayout>
+                            
+                            <Label x:Name="BlackOnlyLabel"  
+                                   Text="черный" 
+                                   TextColor="Black"
+                                   Style="{x:StaticResource LlabelSt}"
+                                   />
+                            <Label x:Name="BlackRedLabel" 
+                                   Style="{x:StaticResource LlabelSt}"
+                                   BindingContext="{x:Reference tableType}"
+                                   IsVisible="{Binding IsToggled}"
+                                   BackgroundColor="White">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="красный " TextColor="Red"/>
+                                        <Span Text="и черный" TextColor="Black"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Switch x:Name="tableType" 
+                                    Style="{StaticResource swichSt}"
+                                    OnColor="Red"
+                                    ThumbColor="Black"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <AbsoluteLayout>
+                            <Label Text="Отмечать отработанные"
+                                   Style="{x:StaticResource LlabelSt}"/>
+                            <Switch x:Name="checkPressed"
+                                    Style="{x:StaticResource swichSt}"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Время">
+                    <ViewCell>
+                        <AbsoluteLayout>
+                            <Label Text="Ограничения по времени"
+                                   Style="{x:StaticResource LlabelSt}"/>
+                            <Switch x:Name="timeRestrOn"
+                                    Style="{x:StaticResource swichSt}"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                    
+                    <ViewCell>
+                        <AbsoluteLayout BindingContext="{x:Reference timeRestrOn}"
+                            IsVisible="{Binding IsToggled}">
+                            <Label Text="{Binding Source={x:Reference Name=timeRest},
+                                Path=Value,
+                                StringFormat='Ограничение по времени {0} мин.'}"
+                                   Style="{StaticResource RlabelSt}"/>
+                            <Stepper Maximum="50"
+                                     Minimum="1"
+                                     Increment="1"
+                                     x:Name="timeRest"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

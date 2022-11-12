@@ -4,6 +4,9 @@
              x:Class="Shulte.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="SetFont" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
             <Style x:Key="ButtonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="FontSize" Value="30"/>

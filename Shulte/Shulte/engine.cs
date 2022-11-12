@@ -43,7 +43,7 @@ namespace Shulte
 	{
 		public Cell[,] arr = new Cell[7, 7];
 		Byte curnum;
-		DateTime start;
+		readonly DateTime start;
 		//DateTime finish;
 		public DateTime Start { get => start; }
 		//public DateTime Finish { get => finish; }
@@ -59,11 +59,11 @@ namespace Shulte
 			{
 				if (curnum % 2 == 0)
 				{
-					if (25 - (curnum / 2) == answer) { curnum++; return true; } 
+					if (25 - (curnum / 2) == answer) { curnum++; return "true"; } 
 				}
 				else
 				{
-					if (curnum / 2 + 1 == answer) { curnum++; return true; }
+					if (curnum / 2 + 1 == answer) { curnum++; return "true"; }
 				}
 			}
 			else if (answer == curnum) { curnum++; return "true"; }
