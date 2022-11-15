@@ -35,7 +35,8 @@
                             <Stepper Maximum="10"
                                      Minimum="4"
                                      Increment="1"
-                                     x:Name="slDim"/>
+                                     x:Name="slDim"
+                                     Value="{Binding Dimension}"/>
                         </AbsoluteLayout>
                     </ViewCell>
                     <ViewCell>
@@ -61,7 +62,8 @@
                             <Switch x:Name="tableType" 
                                     Style="{StaticResource swichSt}"
                                     OnColor="Red"
-                                    ThumbColor="Black"/>
+                                    ThumbColor="Black"
+                                    IsToggled="{Binding RedView}"/>
                         </AbsoluteLayout>
                     </ViewCell>
                     <ViewCell>
@@ -69,7 +71,8 @@
                             <Label Text="Отмечать отработанные"
                                    Style="{x:StaticResource LlabelSt}"/>
                             <Switch x:Name="checkPressed"
-                                    Style="{x:StaticResource swichSt}"/>
+                                    Style="{x:StaticResource swichSt}"
+                                    IsToggled="{Binding SpotSelected}"/>
                         </AbsoluteLayout>
                     </ViewCell>
                 </TableSection>
@@ -79,7 +82,8 @@
                             <Label Text="Ограничения по времени"
                                    Style="{x:StaticResource LlabelSt}"/>
                             <Switch x:Name="timeRestrOn"
-                                    Style="{x:StaticResource swichSt}"/>
+                                    Style="{x:StaticResource swichSt}"
+                                    IsToggled="{Binding TimeRestricted}"/>
                         </AbsoluteLayout>
                     </ViewCell>
                     
@@ -93,7 +97,8 @@
                             <Stepper Maximum="50"
                                      Minimum="1"
                                      Increment="1"
-                                     x:Name="timeRest"/>
+                                     x:Name="timeRest"
+                                     Value="{Binding GameTime}"/>
                         </AbsoluteLayout>
                     </ViewCell>
                 </TableSection>
