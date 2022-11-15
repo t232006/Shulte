@@ -86,19 +86,22 @@
                                     IsToggled="{Binding TimeRestricted}"/>
                         </AbsoluteLayout>
                     </ViewCell>
-                    
                     <ViewCell>
-                        <AbsoluteLayout BindingContext="{x:Reference timeRestrOn}"
-                            IsVisible="{Binding IsToggled}">
+                        <AbsoluteLayout 
+                                   IsVisible="{Binding Source={x:Reference Name=timeRestrOn}, 
+                                                Path=IsToggled}">
                             <Label Text="{Binding Source={x:Reference Name=timeRest},
                                 Path=Value,
-                                StringFormat='Ограничение по времени {0} мин.'}"
-                                   Style="{StaticResource RlabelSt}"/>
+                                StringFormat='Ограничение по времени {0} мин'}"
+                                   FontSize="Medium"
+                                   Style="{StaticResource RlabelSt}"
+                                   />
                             <Stepper Maximum="50"
                                      Minimum="1"
                                      Increment="1"
                                      x:Name="timeRest"
-                                     Value="{Binding GameTime}"/>
+                                     Value="{Binding GameTime}"
+                                     />
                         </AbsoluteLayout>
                     </ViewCell>
                 </TableSection>

@@ -7,15 +7,15 @@ namespace Shulte
 {
 	class settingsModel
 	{
-		public bool RedView { get; set; }
-		public byte Dimension { get; set; }
-		public bool SpotSelected { get; set; }
-		public bool TimeRestricted { get; set; }
-		public byte GameTime { get; set; }
-		public bool ShowTime { get; set; }
+		public bool RedView;
+		public byte Dimension;
+		public bool SpotSelected;
+		public bool TimeRestricted;
+		public byte GameTime;
+		public bool ShowTime;
 		public settingsModel()
 		{
-			RedView = Preferences.Get("Re",false);
+			RedView = Preferences.Get("Red",false);
 			Dimension = (byte)Preferences.Get("Dim", 7);
 			SpotSelected = Preferences.Get("SpotSel", false);
 			TimeRestricted = Preferences.Get("TimeRestr", false);
