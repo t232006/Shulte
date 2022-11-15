@@ -11,22 +11,24 @@ namespace Shulte
 {
 	public partial class MainPage : TabbedPage
 	{
+		readonly SettingViewModel settings;
 		static gridBuilder gb;
 		public MainPage()
 		{
+			settings = new SettingViewModel();
 			InitializeComponent();
+		}
+		protected void onSettingAppearing(Object sender, EventArgs e)
+		{
+			(sender as Settings).BindingContext = settings;
+			(sender as Settings)._svm = settings;
 		}
 		protected void onBlackAppearing(Object sender, EventArgs e)
 		{
 			gb = new gridBuilder();
-			 (sender as PageBlack).LoadFromXaml(gb.getGrid(false));
-			(sender as PageBlack).gb = gb;
-		}
-		protected void onRedAppearing(Object sender, EventArgs e)
-		{
-			gb = new gridBuilder();
-			(sender as PageRed).LoadFromXaml(gb.getGrid(true));
-			(sender as PageRed).gb = gb;
+			 (sender as PageBlack).LoadFromXaml(gb.getGrid(settings.RedView, settings.Dimension));
+			(sender as PageBlack).Gb = gb;
+			(sender as PageBlack).Settings = settings;
 		}
 
 	}

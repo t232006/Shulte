@@ -27,6 +27,8 @@ namespace Shulte
 				else return false;
 			}
 		}
+		int amount;
+		public int Amount { set => amount = value; }
 		byte realvalue;
 		
 		public byte Realvalue
@@ -34,32 +36,35 @@ namespace Shulte
 			set 
 			{
 				realvalue = value;
-				if (DoRed) drawvalue = (byte)(50 - realvalue);
+				if (DoRed) drawvalue = (byte)(amount+1 - realvalue);
 				else drawvalue = realvalue;
 			}
 		}
 	}
 	public class engine
 	{
-		public Cell[,] arr = new Cell[7, 7];
+		public Cell[,] arr;
 		Byte curnum;
 		readonly DateTime start;
 		//DateTime finish;
 		public DateTime Start { get => start; }
 		//public DateTime Finish { get => finish; }
 		bool RedRule { get; set; }
+		byte dim;
+		int amount;
 		public string CheckAnsw (byte answer)
 		{
-			if (curnum == 50)
+			if (curnum == amount)
 			{
 				DateTime finish = DateTime.Now;
 				return finish.Subtract(start).ToString();
 			}
+			int Amount = amount % 2 == 0 ? amount : amount + 1;
 			if (RedRule)
 			{
 				if (curnum % 2 == 0)
 				{
-					if (25 - (curnum / 2) == answer) { curnum++; return "true"; } 
+					if (Amount / 2 - (curnum / 2)+((amount+1) % 2) == answer) { curnum++; return "true"; } 
 				}
 				else
 				{
@@ -69,31 +74,38 @@ namespace Shulte
 			else if (answer == curnum) { curnum++; return "true"; }
 			return "false";
 		}
-		public engine(bool _redRule)
+		public engine(bool _redRule, byte _dim)
 		{
+			dim = _dim;
+			amount = dim * dim;
+			arr = new Cell[dim, dim];
 			RedRule = _redRule;
 			start = DateTime.Now;
 			curnum = 1;
 			List<byte> cont = new List<byte>();
 			Random k = new Random();
 			byte K; int i;
-			for (i = 0; i < 49; i++)
+			int lim = (amount % 2 == 0) ? amount / 2 : amount / 2 + 1;
+			for (i = 0; i < amount; i++)
 			{
 				do
 				{
-					K = (byte)k.Next(1, 50);
+					K = (byte)k.Next(1, amount+1);
 				}
 
 				while (cont.Contains(K));
 				cont.Add(K);
 			}
-			for (i = 0; i < 49; i++)
+			for (i = 0; i < amount; i++)
 			{
-				if (_redRule && (cont[i] > 25))
-					arr[i / 7, i % 7].DoRed = true;
+				int ii = i / dim;
+				int jj = i % dim;
+				arr[ii, jj].Amount = amount;
+				if (_redRule && (cont[i] > lim))
+					arr[ii, jj].DoRed = true;
 				else
-					arr[i / 7, i % 7].DoRed = false;
-				arr[i / 7, i % 7].Realvalue = cont[i];
+					arr[ii, jj].DoRed = false;
+				arr[ii, jj].Realvalue = cont[i];
 			}
 
 		}

@@ -5,8 +5,7 @@
              x:Class="Shulte.MainPage">
     <TabbedPage.Children>
         <loc:PageBlack x:Name="pBlack" Title="Черный" Appearing="onBlackAppearing"/>
-        <loc:PageRed x:Name="pRed" Title="Красный-черный" Appearing="onRedAppearing"/>
-        <loc:Settings x:Name="pSettings" Title="Настройки"/>
+        <loc:Settings x:Name="pSettings" Title="Настройки" Appearing="onSettingAppearing"/>
     </TabbedPage.Children>
     
     

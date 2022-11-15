@@ -12,12 +12,16 @@ namespace Shulte
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PageBlack : ContentPage
 	{
-		public gridBuilder gb;
+		gridBuilder gb;
+		public gridBuilder Gb { set => gb = value; }
+		SettingViewModel settings;
+		public SettingViewModel Settings { set => settings = value; }
 		public PageBlack()
 		{
 			InitializeComponent();
 		}
 		
+
 		private void onButtonPressed(Object sender, EventArgs e)
 		{
 			string s = gb.en.CheckAnsw(byte.Parse((sender as Button).Text));
@@ -27,6 +31,12 @@ namespace Shulte
 			{
 				DisplayAlert("Игра закончена", s, "OK");
 			}
+			else if (settings.SpotSelected)
+			{
+				(sender as Button).BackgroundColor = Color.Gold;
+				(sender as Button).TextColor = Color.Gold;
+			}
+				
 
 		}
 	}

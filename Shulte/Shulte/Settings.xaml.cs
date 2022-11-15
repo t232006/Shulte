@@ -12,17 +12,17 @@ namespace Shulte
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Settings : ContentPage
 	{
-		readonly SettingViewModel svm = new SettingViewModel();
+		public SettingViewModel _svm;
 		public Settings()
 		{
 			InitializeComponent();
-			this.BindingContext = svm;
+			//this.BindingContext = _svm;
 
 		}
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
-			svm.SaveModel();
+			_svm.SaveModel();
 		}
 	}
 }
