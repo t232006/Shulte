@@ -47,7 +47,15 @@ namespace Shulte
 		Byte curnum;
 		readonly DateTime start;
 		//DateTime finish;
-		public DateTime Start { get => start; }
+		public string CheckTime 
+		{ 
+			get
+			{
+				DateTime finish = DateTime.Now;
+				TimeSpan ts = finish.Subtract(start);
+				return $"{ts.Minutes} : {ts.Seconds}";
+			} 
+		}
 		//public DateTime Finish { get => finish; }
 		bool RedRule { get; set; }
 		byte dim;
@@ -56,8 +64,7 @@ namespace Shulte
 		{
 			if (curnum == amount)
 			{
-				DateTime finish = DateTime.Now;
-				return finish.Subtract(start).ToString();
+				return CheckTime;
 			}
 			int Amount = amount % 2 == 0 ? amount : amount + 1;
 			if (RedRule)

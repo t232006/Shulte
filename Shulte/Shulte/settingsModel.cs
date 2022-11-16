@@ -29,7 +29,7 @@ namespace Shulte
 			Preferences.Set("SpotSel", SpotSelected);
 			Preferences.Set("TimeRestr", TimeRestricted);
 			Preferences.Set("GameTime", GameTime);
-			Preferences.Set("Showtime", ShowTime);
+			Preferences.Set("ShowTime", ShowTime);
 		}
 
 	}

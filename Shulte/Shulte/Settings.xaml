@@ -79,6 +79,15 @@
                 <TableSection Title="Время">
                     <ViewCell>
                         <AbsoluteLayout>
+                            <Label Text="Отображать время"
+                                   Style="{x:StaticResource LlabelSt}"/>
+                            <Switch x:Name="timeOn"
+                                    Style="{x:StaticResource swichSt}"
+                                    IsToggled="{Binding ShowTime}"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <AbsoluteLayout>
                             <Label Text="Ограничения по времени"
                                    Style="{x:StaticResource LlabelSt}"/>
                             <Switch x:Name="timeRestrOn"

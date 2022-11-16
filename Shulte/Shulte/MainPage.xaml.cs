@@ -25,10 +25,12 @@ namespace Shulte
 		}
 		protected void onBlackAppearing(Object sender, EventArgs e)
 		{
-			gb = new gridBuilder();
-			 (sender as PageBlack).LoadFromXaml(gb.getGrid(settings.RedView, settings.Dimension));
-			(sender as PageBlack).Gb = gb;
+			gb = new gridBuilder(settings);
 			(sender as PageBlack).Settings = settings;
+			(sender as PageBlack).LoadFromXaml(gb.getGrid());
+			(sender as PageBlack).Start();
+			(sender as PageBlack).Gb = gb;
+			
 		}
 
 	}
