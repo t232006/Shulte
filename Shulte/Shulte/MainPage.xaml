@@ -4,8 +4,9 @@
             xmlns:loc="clr-namespace:Shulte;assembly=Shulte"
              x:Class="Shulte.MainPage">
     <TabbedPage.Children>
-        <loc:PageBlack x:Name="pBlack" Title="Черный" Appearing="onBlackAppearing" Disappearing="onBlackDisappearing"/>
+        <loc:PageBlack x:Name="pBlack" Title="Таблица" Appearing="onBlackAppearing" Disappearing="onBlackDisappearing"/>
         <loc:Settings x:Name="pSettings" Title="Настройки" />
+        <loc:Log x:Name="pLog" Title="Лог игр" />
     </TabbedPage.Children>
     
     

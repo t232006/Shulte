@@ -12,14 +12,18 @@ namespace Shulte
 	public partial class MainPage : TabbedPage
 	{
 		readonly SettingViewModel settings;
+		public save_load_XML Saver;
 		public MainPage()
 		{
+			Saver = new save_load_XML();
 			settings = new SettingViewModel();
 			InitializeComponent();
 			pBlack.Settings = settings;
 			pBlack.BindingContext = settings;
 			pSettings._svm = settings;
 			pSettings.BindingContext = settings;
+			pLog.save_load = Saver;
+			pBlack.save_Load = Saver;
 		}
 		protected void onBlackAppearing(Object sender, EventArgs e)
 		{
@@ -29,7 +33,18 @@ namespace Shulte
 		protected void onBlackDisappearing(Object sender, EventArgs e)
 		{
 			(sender as PageBlack).Alive = false;
+			//Saver = (sender as PageBlack).save_Load;
 		}
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+			Saver.save();
+		}
+
+		/*protected void onLogAppearing(Object sender, EventArgs e)
+		{
+			
+		}*/
 
 	}
 }

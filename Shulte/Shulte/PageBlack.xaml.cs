@@ -12,26 +12,42 @@ namespace Shulte
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PageBlack : ContentPage
 	{
-		Label lab;
+		Label labTime;
 		bool alive = true;
 		public bool Alive { set => alive = value; }
 		public engine en;
 		SettingViewModel sett;
+		public save_load_XML save_Load;
 		public SettingViewModel Settings { set => sett = value; }
+		byte mistakes;
 		public PageBlack()
 		{
 			InitializeComponent();
+			//this.BindingContext = sett
 		}
+		private void saverecord()
+		{
+			TimeSpan ts = new TimeSpan(0, sett.GameTime, 0);
+			string spendTime = String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
+			save_Load.allRec.Add(new saver
+			{
+				datetime = DateTime.Now,
+				dimention = sett.Dimension,
+				totaltime = sett.ShowTime ? spendTime : labTime.Text,
+				count = en.Curnum,
+				mistakes = this.mistakes
+			});
+		} 
 		public void Show()
 		{
 			en = new engine(sett.RedView, sett.Dimension, sett.TimeRestricted, sett.GameTime);
-			byte i; byte j;
+			byte i; byte j; mistakes = 0;
 
-			lab = new Label()
+			labTime = new Label()
 			{
 				BindingContext = sett
 			};
-			lab.SetBinding(IsVisibleProperty, "ShowTime");
+			labTime.SetBinding(IsVisibleProperty, "ShowTime");
 			Device.StartTimer(TimeSpan.FromSeconds(1), onTimerTick);
 
 			Grid grid = new Grid
@@ -39,7 +55,7 @@ namespace Shulte
 				RowDefinitions =
 				{ new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) }}
 			};
-			grid.Children.Add(lab, 0, 0);
+			grid.Children.Add(labTime, 0, 0);
 			for (i = 0; i < sett.Dimension; i++)
 				for (j = 0; j < sett.Dimension; j++)
 				{
@@ -56,29 +72,32 @@ namespace Shulte
 		}
 		private bool onTimerTick()
 		{
-			lab.Text = en.CheckTime;
-			if (lab.Text == "00 : 00")
+			labTime.Text = en.CheckTime;
+			if (labTime.Text == "00 : 00")
 			{
 				alive = false;
 				DisplayAlert("Игра закончена, время вышло", "Результат" + en.Curnum,"OK");
+				saverecord();
 			}
 			return alive;
 		}
 		private void onButtonPressed(Object sender, EventArgs e)
 		{
-			string s = en.CheckAnsw(byte.Parse((sender as Button).AutomationId));
+			saverecord();
+			/*string s = en.CheckAnsw(byte.Parse((sender as Button).AutomationId));
 			if (s == "false")
 				DisplayAlert("Неверно", "Неверно", "OK");
 			else if (s != "true")
 			{
 				DisplayAlert("Игра закончена", s, "OK");
+				saverecord();
 				alive = false;
 			}
 			else if (sett.SpotSelected)
 			{
 				(sender as Button).BackgroundColor = Color.Gold;
 				(sender as Button).TextColor = Color.Gold;
-			}
+			}*/
 		}
 	}
 }

@@ -13,6 +13,7 @@ namespace Shulte
 	public partial class Settings : ContentPage
 	{
 		public SettingViewModel _svm;
+		//public save_load_XML save_Load;
 		public Settings()
 		{
 			InitializeComponent();
