@@ -16,21 +16,20 @@ namespace Shulte
 		bool alive = true;
 		public bool Alive { set => alive = value; }
 		public engine en;
-		SettingViewModel settings;
-		public SettingViewModel Settings { set => settings = value; }
+		SettingViewModel sett;
+		public SettingViewModel Settings { set => sett = value; }
 		public PageBlack()
 		{
 			InitializeComponent();
 		}
 		public void Show()
 		{
-			en = new engine(settings.RedView, settings.Dimension);
+			en = new engine(sett.RedView, sett.Dimension, sett.TimeRestricted, sett.GameTime);
 			byte i; byte j;
 
 			lab = new Label()
 			{
-				BindingContext = settings,
-
+				BindingContext = sett
 			};
 			lab.SetBinding(IsVisibleProperty, "ShowTime");
 			Device.StartTimer(TimeSpan.FromSeconds(1), onTimerTick);
@@ -41,8 +40,8 @@ namespace Shulte
 				{ new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) }}
 			};
 			grid.Children.Add(lab, 0, 0);
-			for (i = 0; i < settings.Dimension; i++)
-				for (j = 0; j < settings.Dimension; j++)
+			for (i = 0; i < sett.Dimension; i++)
+				for (j = 0; j < sett.Dimension; j++)
 				{
 					Style s = en.arr[i, j].DoRed ? (Style)Resources["RedButton"] : (Style)Resources["BlackButton"];
 					Button b = new Button
@@ -58,6 +57,11 @@ namespace Shulte
 		private bool onTimerTick()
 		{
 			lab.Text = en.CheckTime;
+			if (lab.Text == "00 : 00")
+			{
+				alive = false;
+				DisplayAlert("Игра закончена, время вышло", "Результат" + en.Curnum,"OK");
+			}
 			return alive;
 		}
 		private void onButtonPressed(Object sender, EventArgs e)
@@ -70,7 +74,7 @@ namespace Shulte
 				DisplayAlert("Игра закончена", s, "OK");
 				alive = false;
 			}
-			else if (settings.SpotSelected)
+			else if (sett.SpotSelected)
 			{
 				(sender as Button).BackgroundColor = Color.Gold;
 				(sender as Button).TextColor = Color.Gold;

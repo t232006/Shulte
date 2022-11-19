@@ -45,19 +45,32 @@ namespace Shulte
 	public class engine
 	{
 		public Cell[,] arr;
-		Byte curnum;
+		byte curnum;
+		public string Curnum { get => curnum.ToString(); }
 		readonly DateTime start;
-		//DateTime finish;
+		TimeSpan elapse;
+		bool timeRestr;
+		//bool finish;
+		
+		/*public byte Elapse 
+		{
+			set 
+			{
+				elapse = new TimeSpan(0, value, 0);
+			} 
+		}*/
+
 		public string CheckTime 
 		{ 
 			get
 			{
-				DateTime finish = DateTime.Now;
-				TimeSpan ts = finish.Subtract(start);
-				return $"{ts.Minutes} : {ts.Seconds}";
+				DateTime now = DateTime.Now;
+				TimeSpan ts = now.Subtract(start);
+				if (timeRestr)
+					ts = elapse.Subtract(ts);
+				return String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
 			} 
 		}
-		//public DateTime Finish { get => finish; }
 		bool RedRule { get; set; }
 		byte dim;
 		int amount;
@@ -82,13 +95,16 @@ namespace Shulte
 			else if (answer == curnum) { curnum++; return "true"; }
 			return "false";
 		}
-		public engine(bool _redRule, byte _dim)
+		public engine(bool _redRule, byte _dim, bool _timeRestr,  byte _gameTime)
 		{
 			dim = _dim;
 			amount = dim * dim;
 			arr = new Cell[dim, dim];
 			RedRule = _redRule;
 			start = DateTime.Now;
+			elapse = new TimeSpan(0, _gameTime, 0);
+			//finish = fasle;
+			timeRestr = _timeRestr;
 			curnum = 1;
 			List<byte> cont = new List<byte>();
 			Random k = new Random();
@@ -115,8 +131,6 @@ namespace Shulte
 					arr[ii, jj].DoRed = false;
 				arr[ii, jj].Realvalue = cont[i];
 			}
-
 		}
-		
 	}
 }
