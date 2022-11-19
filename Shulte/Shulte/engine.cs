@@ -8,9 +8,9 @@ namespace Shulte
 	public struct Cell
 	{
 		byte drawvalue;
-		public byte Drawvalue
+		public string Drawvalue
 		{
-			get { return drawvalue; }
+			get { return drawvalue.ToString(); }
 
 		}
 		Color color;
@@ -39,6 +39,7 @@ namespace Shulte
 				if (DoRed) drawvalue = (byte)(amount+1 - realvalue);
 				else drawvalue = realvalue;
 			}
+			get => realvalue;
 		}
 	}
 	public class engine
@@ -71,7 +72,7 @@ namespace Shulte
 			{
 				if (curnum % 2 == 0)
 				{
-					if (Amount / 2 - (curnum / 2)+((amount+1) % 2) == answer) { curnum++; return "true"; } 
+					if (Amount / 2 + (curnum / 2) == answer) { curnum++; return "true"; } 
 				}
 				else
 				{

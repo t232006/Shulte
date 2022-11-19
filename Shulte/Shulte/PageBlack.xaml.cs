@@ -12,44 +12,57 @@ namespace Shulte
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PageBlack : ContentPage
 	{
+		Label lab;
 		bool alive = true;
-		//public bool Alive { set => alive = value; }
-		public Label TimeLab;
-		gridBuilder gb;
-		public gridBuilder Gb { set => gb = value; }
+		public bool Alive { set => alive = value; }
+		public engine en;
 		SettingViewModel settings;
 		public SettingViewModel Settings { set => settings = value; }
-		public void Start()
-		{
-			if (!this.FindByName<StackLayout>("contentStack").Children.Contains(TimeLab))
-				this.FindByName<StackLayout>("contentStack").Children.Insert(0, TimeLab);
-			Device.StartTimer(TimeSpan.FromSeconds(1), onTimerTick);
-			TimeLab.SetBinding(Label.IsVisibleProperty, "ShowTime");
-		}
 		public PageBlack()
 		{
-			//InitializeComponent();
+			InitializeComponent();
+		}
+		public void Show()
+		{
+			en = new engine(settings.RedView, settings.Dimension);
+			byte i; byte j;
 
-			TimeLab = new Label
+			lab = new Label()
 			{
-				HorizontalOptions = LayoutOptions.Start,
-				FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Button)),
-				BindingContext = settings
+				BindingContext = settings,
+
 			};
-			
-			//contentStack.Children.Insert(0, TimeLab);
-			/*StackLayout st = new StackLayout();
-			st.Children.i*/
-			//Device.StartTimer(TimeSpan.FromSeconds(1), onTimerTick);
+			lab.SetBinding(IsVisibleProperty, "ShowTime");
+			Device.StartTimer(TimeSpan.FromSeconds(1), onTimerTick);
+
+			Grid grid = new Grid
+			{
+				RowDefinitions =
+				{ new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) }}
+			};
+			grid.Children.Add(lab, 0, 0);
+			for (i = 0; i < settings.Dimension; i++)
+				for (j = 0; j < settings.Dimension; j++)
+				{
+					Style s = en.arr[i, j].DoRed ? (Style)Resources["RedButton"] : (Style)Resources["BlackButton"];
+					Button b = new Button
+					{ Text = en.arr[i, j].Drawvalue,
+						Style = s,
+						AutomationId = en.arr[i, j].Realvalue.ToString()
+					};
+					b.Clicked += onButtonPressed;
+					grid.Children.Add(b, i, j + 1);
+				}
+			Content = grid;
 		}
 		private bool onTimerTick()
 		{
-			TimeLab.Text = gb.en.CheckTime;
+			lab.Text = en.CheckTime;
 			return alive;
 		}
 		private void onButtonPressed(Object sender, EventArgs e)
 		{
-			string s = gb.en.CheckAnsw(byte.Parse((sender as Button).Text));
+			string s = en.CheckAnsw(byte.Parse((sender as Button).AutomationId));
 			if (s == "false")
 				DisplayAlert("Неверно", "Неверно", "OK");
 			else if (s != "true")
@@ -62,8 +75,6 @@ namespace Shulte
 				(sender as Button).BackgroundColor = Color.Gold;
 				(sender as Button).TextColor = Color.Gold;
 			}
-				
-
 		}
 	}
 }
