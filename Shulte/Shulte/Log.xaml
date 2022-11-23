@@ -8,6 +8,13 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Удалить?" 
+                                  IsDestructive="True" 
+                                  Command="{Binding Path=BindingContext.Delete, Source={x:Reference LogView}}" 
+                                  CommandParameter="{Binding .}"
+                                  />
+                    </ViewCell.ContextActions>
                     <ViewCell.View>
                         <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding datetime}" TextColor="Aqua"/>
