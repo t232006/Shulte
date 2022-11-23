@@ -88,6 +88,15 @@
                     </ViewCell>
                     <ViewCell>
                         <AbsoluteLayout>
+                            <Label Text="Наказывать за ошибки"
+                                   Style="{x:StaticResource LlabelSt}"/>
+                            <Switch x:Name="punish"
+                                    Style="{x:StaticResource swichSt}"
+                                    IsToggled="{Binding Punish}"/>
+                        </AbsoluteLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <AbsoluteLayout>
                             <Label Text="Ограничения по времени"
                                    Style="{x:StaticResource LlabelSt}"/>
                             <Switch x:Name="timeRestrOn"

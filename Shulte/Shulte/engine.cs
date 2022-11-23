@@ -60,16 +60,17 @@ namespace Shulte
 			} 
 		}*/
 
-		public string CheckTime 
+		public string CheckTime(byte mistakes) 
 		{ 
-			get
-			{
-				DateTime now = DateTime.Now;
-				TimeSpan ts = now.Subtract(start);
-				if (timeRestr)
-					ts = elapse.Subtract(ts);
-				return String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
-			} 
+			//get
+			//{
+			DateTime now = DateTime.Now;
+			now = now.AddSeconds(mistakes * 5);
+			TimeSpan ts = now.Subtract(start);
+			if (timeRestr)
+				ts = elapse.Subtract(ts);
+			return String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
+			//} 
 		}
 		bool RedRule { get; set; }
 		byte dim;
@@ -78,7 +79,7 @@ namespace Shulte
 		{
 			if (curnum == amount)
 			{
-				return CheckTime;
+				return "finish";
 			}
 			int Amount = amount % 2 == 0 ? amount : amount + 1;
 			if (RedRule)

@@ -33,8 +33,8 @@ namespace Shulte
 			{
 				datetime = DateTime.Now,
 				dimention = sett.Dimension,
-				totaltime = sett.ShowTime ? spendTime : labTime.Text,
-				count = en.Curnum,
+				totaltime = sett.TimeRestricted ? spendTime : labTime.Text,
+				count = en.Curnum.ToString(),
 				mistakes = this.mistakes
 			});
 		} 
@@ -72,7 +72,10 @@ namespace Shulte
 		}
 		private bool onTimerTick()
 		{
-			labTime.Text = en.CheckTime;
+			if (sett.Punish)
+				labTime.Text = en.CheckTime(mistakes);
+			else
+				labTime.Text = en.CheckTime(0);
 			if (labTime.Text == "00 : 00")
 			{
 				alive = false;
@@ -83,13 +86,16 @@ namespace Shulte
 		}
 		private void onButtonPressed(Object sender, EventArgs e)
 		{
-			saverecord();
-			/*string s = en.CheckAnsw(byte.Parse((sender as Button).AutomationId));
+			//saverecord();
+			string s = en.CheckAnsw(byte.Parse((sender as Button).AutomationId));
 			if (s == "false")
-				DisplayAlert("Неверно", "Неверно", "OK");
-			else if (s != "true")
 			{
-				DisplayAlert("Игра закончена", s, "OK");
+				DisplayAlert("Неверно", "Неверно", "OK");
+				mistakes++;
+			}
+			else if (s == "finish")
+			{
+				DisplayAlert("Игра закончена", labTime.Text, "OK");
 				saverecord();
 				alive = false;
 			}
@@ -97,7 +103,7 @@ namespace Shulte
 			{
 				(sender as Button).BackgroundColor = Color.Gold;
 				(sender as Button).TextColor = Color.Gold;
-			}*/
+			}
 		}
 	}
 }

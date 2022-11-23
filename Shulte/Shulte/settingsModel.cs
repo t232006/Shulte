@@ -11,6 +11,7 @@ namespace Shulte
 		public byte Dimension;
 		public bool SpotSelected;
 		public bool TimeRestricted;
+		public bool Punish;
 		public byte GameTime;
 		public bool ShowTime;
 		public settingsModel()
@@ -18,6 +19,7 @@ namespace Shulte
 			RedView = Preferences.Get("Red",false);
 			Dimension = (byte)Preferences.Get("Dim", 7);
 			SpotSelected = Preferences.Get("SpotSel", false);
+			Punish = Preferences.Get("Pun", false);
 			TimeRestricted = Preferences.Get("TimeRestr", false);
 			GameTime = (byte)Preferences.Get("GameTime", 5);
 			ShowTime = Preferences.Get("ShowTime", false);	
@@ -27,6 +29,7 @@ namespace Shulte
 			Preferences.Set("Red", RedView);
 			Preferences.Set("Dim", Dimension);
 			Preferences.Set("SpotSel", SpotSelected);
+			Preferences.Set("Pun", Punish);
 			Preferences.Set("TimeRestr", TimeRestricted);
 			Preferences.Set("GameTime", GameTime);
 			Preferences.Set("ShowTime", ShowTime);

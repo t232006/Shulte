@@ -20,12 +20,12 @@ namespace Shulte
 	public class save_load_XML
 	{
 		public ObservableCollection<saver> allRec { get; set; }
-		public ICommand Delete { get; protected set; } 
+		//public ICommand Delete { get; protected set; } 
 		XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<saver>));
 		
 		public save_load_XML()
 		{
-			Delete = new Command(del);
+			//Delete = new Command(del);
 			try
 			{
 				load();
@@ -41,13 +41,6 @@ namespace Shulte
 			return Path.Combine(inuse, "achivements.xml");
 		}
 
-		private void del(object item)
-		{
-			saver s = item as saver;
-			if (s == null) return;
-			allRec.Remove(s);
-		}
-
 		public void save()
 		{
 			
@@ -59,13 +52,15 @@ namespace Shulte
 		public void load()
 		{
 			using (FileStream fs = new FileStream(getFile(), FileMode.Open, FileAccess.Read))
+			//using (StreamReader fs = new StreamReader(getFile()))
 			{
 				try
 				{
+					//string s = fs.ReadToEnd();
 					allRec = (ObservableCollection<saver>)ser.Deserialize(fs);
 				}
-				catch { }
-				
+				catch { allRec = new ObservableCollection<saver>(); }
+
 			}
 		}
 	}

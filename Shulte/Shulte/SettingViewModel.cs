@@ -58,6 +58,15 @@ namespace Shulte
 				onPropertyChanged("GameTime");
 			}
 		}
+		public bool Punish
+		{
+			get => setMod.Punish;
+			set
+			{
+				setMod.Punish = value;
+				onPropertyChanged("Punish");
+			}
+		}
 		public bool ShowTime
 		{
 			get => setMod.ShowTime;

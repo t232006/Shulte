@@ -11,7 +11,7 @@
                     <ViewCell.ContextActions>
                         <MenuItem Text="Удалить?" 
                                   IsDestructive="True" 
-                                  Command="{Binding Path=BindingContext.Delete, Source={x:Reference LogView}}" 
+                                  Clicked="onClick" 
                                   CommandParameter="{Binding .}"
                                   />
                     </ViewCell.ContextActions>

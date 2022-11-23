@@ -33,15 +33,11 @@ namespace Shulte
 			//this.BindingContext = save_load.allRec;
 		}
 
-		async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
-		{
-			if (e.Item == null)
-				return;
-
-			await DisplayAlert("Item Tapped", (e.Item as saver).datetime.ToString(), "OK");
-
-			//Deselect Item
-			((ListView)sender).SelectedItem = null;
+		private void onClick(object Sender, EventArgs e)
+		{	
+			saver s = (saver)(Sender as MenuItem).CommandParameter ;
+			if (s == null) return;
+			save_load.allRec.Remove(s);
 		}
 	}
 }
