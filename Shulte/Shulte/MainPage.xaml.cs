@@ -13,9 +13,10 @@ namespace Shulte
 	{
 		readonly SettingViewModel settings;
 		public save_load_XML Saver;
-		public MainPage()
+		public MainPage(save_load_XML _Saver)
 		{
-			Saver = new save_load_XML();
+
+			this.Saver = _Saver;
 			settings = new SettingViewModel();
 			InitializeComponent();
 			pBlack.Settings = settings;
@@ -34,11 +35,6 @@ namespace Shulte
 		{
 			(sender as PageBlack).Alive = false;
 			//Saver = (sender as PageBlack).save_Load;
-		}
-		protected override void OnDisappearing()
-		{
-			base.OnDisappearing();
-			Saver.save();
 		}
 
 		/*protected void onLogAppearing(Object sender, EventArgs e)

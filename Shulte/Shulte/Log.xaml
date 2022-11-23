@@ -2,21 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Shulte.Log">
-  <ListView x:Name="LogView"
-            ItemsSource="{Binding save_load}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
+    <ListView x:Name="LogView"
+            >
 
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding datetime}" TextColor="Aqua"/>
-                        <Label Text="{Binding dimention}"/>
-                        <Label Text="{Binding totaltime}"/>
-                        <Label Text="{Binding count}"/>
-                        <Label Text="{Binding mistakes}" />
-                    </StackLayout>
+                    <ViewCell.View>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding datetime}" TextColor="Aqua"/>
+                            <Label Text="{Binding dimention}"/>
+                            <Label Text="{Binding totaltime}"/>
+                            <Label Text="{Binding count}"/>
+                            <Label Text="{Binding mistakes}" />
+                        </StackLayout>
+                    </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>

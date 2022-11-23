@@ -9,16 +9,16 @@ namespace Shulte
 {
 	public class saver
 	{
-		public DateTime datetime;
-		public byte dimention;
-		public string totaltime;
-		public string count;
-		public byte mistakes;
+		public DateTime datetime { get; set; }
+		public byte dimention { get; set; }
+		public string totaltime { get; set; }
+		public string count { get; set; }
+		public byte mistakes { get; set; }
 	}
 	public class save_load_XML
 	{
-		public ObservableCollection<saver> allRec = new ObservableCollection<saver>();
-		XmlSerializer ser = new XmlSerializer(typeof(saver));
+		public ObservableCollection<saver> allRec { get; set; }
+		XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<saver>));
 		
 		public save_load_XML()
 		{
@@ -47,7 +47,12 @@ namespace Shulte
 		{
 			using (FileStream fs = new FileStream(getFile(), FileMode.Open, FileAccess.Read))
 			{
-				allRec = (ObservableCollection<saver>)ser.Deserialize(fs);
+				try
+				{
+					allRec = (ObservableCollection<saver>)ser.Deserialize(fs);
+				}
+				catch { }
+				
 			}
 		}
 	}

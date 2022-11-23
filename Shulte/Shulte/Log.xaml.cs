@@ -13,17 +13,19 @@ namespace Shulte
 	public partial class Log : ContentPage
 	{
 		public save_load_XML save_load;
-
+		//Label selected = new Label();
 		public Log()
 		{
 			InitializeComponent();
 			//save_load = new save_load_XML();
-			
+			this.BindingContext = save_load;
+	
 		}
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			LogView.ItemsSource = save_load.allRec;
+			//this.BindingContext = save_load.allRec;
 		}
 
 		async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -31,7 +33,7 @@ namespace Shulte
 			if (e.Item == null)
 				return;
 
-			await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
+			await DisplayAlert("Item Tapped", (e.Item as saver).datetime.ToString(), "OK");
 
 			//Deselect Item
 			((ListView)sender).SelectedItem = null;
