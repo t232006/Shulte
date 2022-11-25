@@ -11,7 +11,26 @@ namespace Shulte
 {
 	public class saver
 	{
-		public DateTime datetime { get; set; }
+		string date;
+		string time;
+		public string Time
+		{
+			get => time;
+			set { time = value; }
+		}
+		public string Date
+		{
+			get => date;
+			set { date = value; }
+		}
+		public DateTime Datetime
+		{
+			set
+			{
+				date = value.ToShortDateString();
+				time = value.ToShortTimeString();
+			}
+		}
 		public byte dimention { get; set; }
 		public string totaltime { get; set; }
 		public string count { get; set; }
@@ -32,6 +51,7 @@ namespace Shulte
 			}
 			catch(FileNotFoundException)
 			{
+				 allRec = new ObservableCollection<saver>(); 
 			}
 		}
 
@@ -57,6 +77,7 @@ namespace Shulte
 				try
 				{
 					//string s = fs.ReadToEnd();
+					//File.Delete(getFile());
 					allRec = (ObservableCollection<saver>)ser.Deserialize(fs);
 				}
 				catch { allRec = new ObservableCollection<saver>(); }

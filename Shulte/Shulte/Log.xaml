@@ -17,7 +17,8 @@
                     </ViewCell.ContextActions>
                     <ViewCell.View>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding datetime}" TextColor="Aqua"/>
+                            <Label Text="{Binding Time}" TextColor="Aqua"/>
+                            <Label Text="{Binding Date}" TextColor="Aqua"/>
                             <Label Text="{Binding dimention}"/>
                             <Label Text="{Binding totaltime}"/>
                             <Label Text="{Binding count}"/>

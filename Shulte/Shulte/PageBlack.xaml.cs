@@ -31,7 +31,7 @@ namespace Shulte
 			string spendTime = String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
 			save_Load.allRec.Add(new saver
 			{
-				datetime = DateTime.Now,
+				Datetime = DateTime.Now,
 				dimention = sett.Dimension,
 				totaltime = sett.TimeRestricted ? spendTime : labTime.Text,
 				count = en.Curnum.ToString(),

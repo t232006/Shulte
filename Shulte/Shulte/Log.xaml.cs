@@ -21,11 +21,7 @@ namespace Shulte
 			this.BindingContext = save_load;
 	
 		}
-		void OnContClick (object sender, EventArgs e)
-		{
-			var mi = sender as MenuItem;
-			DisplayAlert("menu", (mi.CommandParameter as saver).datetime.ToString(), "OK");
-		}
+		
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
