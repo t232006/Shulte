@@ -2,31 +2,53 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Shulte.Log">
-    <ListView x:Name="LogView"
-            >
+    <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Label Text="Время" Grid.Column="0" Grid.Row="0"/>
+            <Label Text="Правила" Grid.Column="1" Grid.Row="0"/>
+            <Label Text="Размерность" Grid.Column="2" Grid.Row="0"/>
+            <Label Text="Затраченное время" Grid.Column="3" Grid.Row="0"/>
+            <Label Text="Выполнено" Grid.Column="4" Grid.Row="0"/>
+            <Label Text="Ошибок" Grid.Column="5" Grid.Row="0"/>
+        </Grid>
+        <ListView x:Name="LogView"
+                  GroupDisplayBinding="{Binding Name}"
+                  ItemsSource="{Binding DateGroup}"
+                  IsGroupingEnabled="True">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding Name}" FontSize="20"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
 
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <ViewCell.ContextActions>
-                        <MenuItem Text="Удалить?" 
-                                  IsDestructive="True" 
-                                  Clicked="onClick" 
-                                  CommandParameter="{Binding .}"
-                                  />
-                    </ViewCell.ContextActions>
-                    <ViewCell.View>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Time}" TextColor="Aqua"/>
-                            <Label Text="{Binding Date}" TextColor="Aqua"/>
-                            <Label Text="{Binding dimention}"/>
-                            <Label Text="{Binding totaltime}"/>
-                            <Label Text="{Binding count}"/>
-                            <Label Text="{Binding mistakes}" />
-                        </StackLayout>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Удалить?" 
+                                      IsDestructive="True" 
+                                      Clicked="onClick" 
+                                      CommandParameter="{Binding .}"
+                                      />
+                        </ViewCell.ContextActions>
+                        <ViewCell.View>
+                            <Grid>
+                                <Label Text="{Binding Time}" Grid.Column="0" Grid.Row="0"/>
+                                <Label Text="{Binding rule}" Grid.Column="1" Grid.Row="0"/>
+                                <Label Text="{Binding dimention}" Grid.Column="2" Grid.Row="0"/>
+                                <Label Text="{Binding totaltime}" Grid.Column="3" Grid.Row="0"/>
+                                <Label Text="{Binding count}" Grid.Column="4" Grid.Row="0"/>
+                                <Label Text="{Binding mistakes}" Grid.Column="5" Grid.Row="0"/>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

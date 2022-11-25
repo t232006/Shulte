@@ -46,7 +46,7 @@ namespace Shulte
 	{
 		public Cell[,] arr;
 		byte curnum;
-		public string Curnum { get => curnum.ToString(); }
+		public byte Curnum { get => curnum; }
 		readonly DateTime start;
 		TimeSpan elapse;
 		bool timeRestr;

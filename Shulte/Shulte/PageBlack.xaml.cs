@@ -27,16 +27,23 @@ namespace Shulte
 		}
 		private void saverecord()
 		{
-			TimeSpan ts = new TimeSpan(0, sett.GameTime, 0);
-			string spendTime = String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
+			string spendTime;
+			if (en.CheckTime(mistakes) == "00 : 00")
+			{
+				TimeSpan ts = new TimeSpan(0, sett.GameTime, 0);
+				spendTime = String.Format("{0:00} : {1:00}", ts.Minutes, ts.Seconds);
+			}
+			else
+				spendTime = en.CheckTime(mistakes);
 			save_Load.allRec.Add(new saver
 			{
 				Datetime = DateTime.Now,
 				dimention = sett.Dimension,
+				rule = sett.RedView ? "чередующиеся" : "черные",
 				totaltime = sett.TimeRestricted ? spendTime : labTime.Text,
 				count = en.Curnum.ToString(),
 				mistakes = this.mistakes
-			});
+			}); 
 		} 
 		public void Show()
 		{
@@ -79,7 +86,7 @@ namespace Shulte
 			if (labTime.Text == "00 : 00")
 			{
 				alive = false;
-				DisplayAlert("Игра закончена, время вышло", "Результат" + en.Curnum,"OK");
+				DisplayAlert("Игра закончена, время вышло", "Результат: " + (en.Curnum-1).ToString(),"OK");
 				saverecord();
 			}
 			return alive;

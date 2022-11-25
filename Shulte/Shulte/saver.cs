@@ -31,6 +31,7 @@ namespace Shulte
 				time = value.ToShortTimeString();
 			}
 		}
+		public string rule { get; set; }
 		public byte dimention { get; set; }
 		public string totaltime { get; set; }
 		public string count { get; set; }
@@ -80,7 +81,11 @@ namespace Shulte
 					//File.Delete(getFile());
 					allRec = (ObservableCollection<saver>)ser.Deserialize(fs);
 				}
-				catch { allRec = new ObservableCollection<saver>(); }
+				catch 
+				{
+					File.Delete(getFile()); 
+					allRec = new ObservableCollection<saver>(); 
+				}
 
 			}
 		}
