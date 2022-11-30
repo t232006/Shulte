@@ -67,12 +67,13 @@ namespace Shulte
 				for (j = 0; j < sett.Dimension; j++)
 				{
 					Style s = en.arr[i, j].DoRed ? (Style)Resources["RedButton"] : (Style)Resources["BlackButton"];
-					Button b = new Button
-					{ Text = en.arr[i, j].Drawvalue,
+					StretchButton b = new StretchButton
+					{ 
+						Text = en.arr[i, j].Drawvalue,
 						Style = s,
-						AutomationId = en.arr[i, j].Realvalue.ToString()
+						RealValue = en.arr[i, j].Realvalue.ToString()
 					};
-					b.Clicked += onButtonPressed;
+					b.pressed += onButtonPressed;
 					grid.Children.Add(b, i, j + 1);
 				}
 			Content = grid;
@@ -94,7 +95,7 @@ namespace Shulte
 		private void onButtonPressed(Object sender, EventArgs e)
 		{
 			//saverecord();
-			string s = en.CheckAnsw(byte.Parse((sender as Button).AutomationId));
+			string s = en.CheckAnsw(byte.Parse((sender as StretchButton).RealValue));
 			if (s == "false")
 			{
 				DisplayAlert("Неверно", "Неверно", "OK");
