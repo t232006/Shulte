@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Xml.Serialization;
+using System.Text.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -39,9 +39,14 @@ namespace Shulte
 	}
 	public class save_load_XML
 	{
-		public ObservableCollection<saver> allRec { get; set; }
+		static ObservableCollection<saver> allRec;
 		//public ICommand Delete { get; protected set; } 
-		XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<saver>));
+		//XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<saver>));
+		public ObservableCollection<saver> AllRec
+		{
+			get => allRec;
+			set { AllRec = value; }
+		} 
 		
 		public save_load_XML()
 		{
@@ -65,9 +70,9 @@ namespace Shulte
 		public void save()
 		{
 			
-			using (FileStream fs = new FileStream(getFile(),FileMode.OpenOrCreate, FileAccess.Write))
+			using (FileStream fs = new FileStream(getFile(),FileMode.Create, FileAccess.Write))
 			{
-				ser.Serialize(fs, allRec);
+				JsonSerializer.Serialize(fs, allRec);
 			}
 		} 
 		public void load()
@@ -75,16 +80,17 @@ namespace Shulte
 			using (FileStream fs = new FileStream(getFile(), FileMode.Open, FileAccess.Read))
 			//using (StreamReader fs = new StreamReader(getFile()))
 			{
+				allRec = new ObservableCollection<saver>();
 				try
 				{
 					//string s = fs.ReadToEnd();
 					//File.Delete(getFile());
-					allRec = (ObservableCollection<saver>)ser.Deserialize(fs);
+					allRec = JsonSerializer.Deserialize<ObservableCollection<saver>>(fs);
 				}
 				catch 
 				{
-					File.Delete(getFile()); 
-					allRec = new ObservableCollection<saver>(); 
+					//File.Delete(getFile()); 
+					 
 				}
 
 			}

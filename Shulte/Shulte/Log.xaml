@@ -21,7 +21,7 @@
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label Text="{Binding Name}" FontSize="20"/>
+                        <Label Text="{Binding Name}" FontSize="21"/>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>

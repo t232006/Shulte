@@ -35,7 +35,7 @@ namespace Shulte
 			}
 			else
 				spendTime = en.CheckTime(mistakes);
-			save_Load.allRec.Add(new saver
+			save_Load.AllRec.Add(new saver
 			{
 				Datetime = DateTime.Now,
 				dimention = sett.Dimension,
