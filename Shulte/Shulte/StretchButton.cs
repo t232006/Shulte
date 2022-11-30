@@ -18,7 +18,7 @@ namespace Shulte
 		}
 		public string Text 
 		{
-			set { Text = value; }
+			set { button.Text = value; }
 		}
 		bool toHide;
 		public bool ToHide
@@ -31,12 +31,13 @@ namespace Shulte
 			button = new Button { };
 			button.Clicked += (sender, e) =>
 			{
+				pressed?.Invoke(this, e);
 				if (toHide)
 				{
 					button.BackgroundColor = Color.Gold;
 					button.TextColor = Color.Gold;
 				}
-				pressed?.Invoke(this, e);
+				
 			};
 			Content = button;
 			button.SizeChanged += (sender, e) =>

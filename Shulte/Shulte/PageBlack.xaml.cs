@@ -68,10 +68,11 @@ namespace Shulte
 				{
 					Style s = en.arr[i, j].DoRed ? (Style)Resources["RedButton"] : (Style)Resources["BlackButton"];
 					StretchButton b = new StretchButton
-					{ 
+					{
 						Text = en.arr[i, j].Drawvalue,
-						Style = s,
-						RealValue = en.arr[i, j].Realvalue.ToString()
+						style = s,
+						RealValue = en.arr[i, j].Realvalue.ToString(),
+						ToHide = sett.SpotSelected
 					};
 					b.pressed += onButtonPressed;
 					grid.Children.Add(b, i, j + 1);
@@ -99,6 +100,7 @@ namespace Shulte
 			if (s == "false")
 			{
 				DisplayAlert("Неверно", "Неверно", "OK");
+				(sender as StretchButton).ToHide = false;
 				mistakes++;
 			}
 			else if (s == "finish")
@@ -106,11 +108,6 @@ namespace Shulte
 				DisplayAlert("Игра закончена", labTime.Text, "OK");
 				saverecord();
 				alive = false;
-			}
-			else if (sett.SpotSelected)
-			{
-				(sender as Button).BackgroundColor = Color.Gold;
-				(sender as Button).TextColor = Color.Gold;
 			}
 		}
 	}
