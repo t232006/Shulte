@@ -16,7 +16,7 @@
                 <Setter Property="AbsoluteLayout.LayoutBounds" Value="10,5,270,35"/>
             </Style>
             <Style x:Key="RlabelSt" TargetType="Label" BasedOn="{StaticResource Key=labelSt}">
-                <Setter Property="AbsoluteLayout.LayoutBounds" Value=".995,0.3,350,35"/>
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value=".995,0.3,185,35"/>
                 <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
             </Style>
         </ResourceDictionary>
@@ -27,16 +27,16 @@
                 <TableSection Title="Тип таблицы и внешний вид">
                     <ViewCell>
                         <AbsoluteLayout>
-                            <Label Text="{Binding Source={x:Reference Name=slDim},
-                                Path=Value,
-                                StringFormat='Размерность {0} X {0}'}"
-                                   FontSize="Medium"
-                                   Style="{StaticResource RlabelSt}"/>
                             <Stepper Maximum="10"
                                      Minimum="4"
                                      Increment="1"
                                      x:Name="slDim"
                                      Value="{Binding Dimension}"/>
+                            <Label Text="{Binding Source={x:Reference Name=slDim},
+                                Path=Value,
+                                StringFormat='Размерность {0} X {0}'}"
+                                   FontSize="Medium"
+                                   Style="{StaticResource RlabelSt}"/>
                         </AbsoluteLayout>
                     </ViewCell>
                     <ViewCell>
