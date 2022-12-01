@@ -43,6 +43,7 @@ namespace Shulte
 			button.SizeChanged += (sender, e) =>
 			{
 				button.FontSize = Height > Width ? Width / 3 : Height / 3;
+				button.CornerRadius = (int)button.FontSize - 7;
 			};
 			
 		}
