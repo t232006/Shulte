@@ -72,6 +72,7 @@ namespace Shulte
 						Text = en.arr[i, j].Drawvalue,
 						style = s,
 						RealValue = en.arr[i, j].Realvalue.ToString(),
+						ToHideThis = sett.SpotSelected,
 						ToHide = sett.SpotSelected
 					};
 					b.pressed += onButtonPressed;
@@ -100,7 +101,7 @@ namespace Shulte
 			if (s == "false")
 			{
 				DisplayAlert("Неверно", "Неверно", "OK");
-				(sender as StretchButton).ToHide = false;
+				(sender as StretchButton).ToHideThis = false;
 				mistakes++;
 			}
 			else if (s == "finish")

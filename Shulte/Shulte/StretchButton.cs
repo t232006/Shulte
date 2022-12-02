@@ -25,6 +25,8 @@ namespace Shulte
 		{
 			set { toHide = value; }
 		}
+		bool toHideThis;
+		public bool ToHideThis { set { toHideThis = value; } } 
 		public string RealValue { get; set; }
 		public StretchButton()
 		{
@@ -32,11 +34,12 @@ namespace Shulte
 			button.Clicked += (sender, e) =>
 			{
 				pressed?.Invoke(this, e);
-				if (toHide)
+				if (toHideThis)
 				{
 					button.BackgroundColor = Color.Gold;
 					button.TextColor = Color.Gold;
-				}
+				} else
+				if (toHide) toHideThis = true; //if pressed wrong to return previous state
 				
 			};
 			Content = button;

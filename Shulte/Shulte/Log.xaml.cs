@@ -37,21 +37,27 @@ namespace Shulte
 			//this.BindingContext = save_load.allRec;
 			DateGroup = getDateGroup();
 			DateGroup1 = new ObservableCollection<saver>(save_load.AllRec);
+			refresh();
 			this.BindingContext = this;
 		}
 
-		private void onClick(object Sender, EventArgs e)
-		{	
-			saver s = (saver)(Sender as MenuItem).CommandParameter ;
-			if (s == null) return;
-			save_load.AllRec.Remove(s);
-
+		private void refresh()
+		{
 			LogView.ItemsSource = DateGroup1;
 			LogView.IsGroupingEnabled = false;
 			DateGroup = getDateGroup();
 
 			LogView.ItemsSource = DateGroup;
 			LogView.IsGroupingEnabled = true;
+		}
+		private void onClick(object Sender, EventArgs e)
+		{	
+			saver s = (saver)(Sender as MenuItem).CommandParameter ;
+			if (s == null) return;
+			save_load.AllRec.Remove(s);
+			refresh();
+
+			
 		}
 	}
 }
